@@ -1,0 +1,697 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-menubar/node_modules/menubar/index.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-menubar">npmtest-menubar (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-menubar/node_modules/menubar/index.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">9.73% <small>(11 / 113)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 83)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 11)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">11.22% <small>(11 / 98)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> » <a href="index.html">node-npmtest-menubar/node_modules/menubar/</a> » index.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159</td><td class="line-coverage"><span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var path = require('path')
+var events = require('events')
+var fs = require('fs')
+&nbsp;
+var electron = require('electron')
+<span class="cstat-no" title="statement not covered">var app = electron.app</span>
+<span class="cstat-no" title="statement not covered">var Tray = electron.Tray</span>
+<span class="cstat-no" title="statement not covered">var BrowserWindow = electron.BrowserWindow</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">var extend = require('extend')</span>
+<span class="cstat-no" title="statement not covered">var Positioner = require('electron-positioner')</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">module.exports = <span class="fstat-no" title="function not covered">function create (opts) {</span></span>
+<span class="cstat-no" title="statement not covered">  if (typeof opts === 'undefined') <span class="cstat-no" title="statement not covered">opts = {dir: app.getAppPath()}</span></span>
+<span class="cstat-no" title="statement not covered">  if (typeof opts === 'string') <span class="cstat-no" title="statement not covered">opts = {dir: opts}</span></span>
+<span class="cstat-no" title="statement not covered">  if (!opts.dir) <span class="cstat-no" title="statement not covered">opts.dir = app.getAppPath()</span></span>
+<span class="cstat-no" title="statement not covered">  if (!(path.isAbsolute(opts.dir))) <span class="cstat-no" title="statement not covered">opts.dir = path.resolve(opts.dir)</span></span>
+<span class="cstat-no" title="statement not covered">  if (!opts.index) <span class="cstat-no" title="statement not covered">opts.index = 'file://' + path.join(opts.dir, 'index.html')</span></span>
+<span class="cstat-no" title="statement not covered">  if (!opts.windowPosition) <span class="cstat-no" title="statement not covered">opts.windowPosition = (process.platform === 'win32') ? 'trayBottomCenter' : 'trayCenter'</span></span>
+<span class="cstat-no" title="statement not covered">  if (typeof opts.showDockIcon === 'undefined') <span class="cstat-no" title="statement not covered">opts.showDockIcon = false</span></span>
+&nbsp;
+  // set width/height on opts to be usable before the window is created
+<span class="cstat-no" title="statement not covered">  opts.width = opts.width || 400</span>
+<span class="cstat-no" title="statement not covered">  opts.height = opts.height || 400</span>
+<span class="cstat-no" title="statement not covered">  opts.tooltip = opts.tooltip || ''</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var menubar = new events.EventEmitter()</span>
+<span class="cstat-no" title="statement not covered">  menubar.app = app</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (app.isReady()) <span class="cstat-no" title="statement not covered">appReady()</span></span>
+  else <span class="cstat-no" title="statement not covered">app.on('ready', appReady)</span>
+&nbsp;
+  // Set / get options
+<span class="cstat-no" title="statement not covered">  menubar.setOption = <span class="fstat-no" title="function not covered">function (opt, val) {</span></span>
+<span class="cstat-no" title="statement not covered">    opts[opt] = val</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  menubar.getOption = <span class="fstat-no" title="function not covered">function (opt) {</span></span>
+<span class="cstat-no" title="statement not covered">    return opts[opt]</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return menubar</span>
+&nbsp;
+<span class="fstat-no" title="function not covered">  function appReady () {</span>
+<span class="cstat-no" title="statement not covered">    if (app.dock &amp;&amp; !opts.showDockIcon) <span class="cstat-no" title="statement not covered">app.dock.hide()</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var iconPath = opts.icon || path.join(opts.dir, 'IconTemplate.png')</span>
+<span class="cstat-no" title="statement not covered">    if (!fs.existsSync(iconPath)) <span class="cstat-no" title="statement not covered">iconPath = path.join(__dirname, 'example', 'IconTemplate.png') </span></span>// default cat icon
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var cachedBounds </span>// cachedBounds are needed for double-clicked event
+<span class="cstat-no" title="statement not covered">    var defaultClickEvent = opts.showOnRightClick ? 'right-click' : 'click'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    menubar.tray = opts.tray || new Tray(iconPath)</span>
+<span class="cstat-no" title="statement not covered">    menubar.tray.on(defaultClickEvent, clicked)</span>
+<span class="cstat-no" title="statement not covered">    menubar.tray.on('double-click', clicked)</span>
+<span class="cstat-no" title="statement not covered">    menubar.tray.setToolTip(opts.tooltip)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var supportsTrayHighlightState = false</span>
+<span class="cstat-no" title="statement not covered">    try {</span>
+<span class="cstat-no" title="statement not covered">      menubar.tray.setHighlightMode('never')</span>
+<span class="cstat-no" title="statement not covered">      supportsTrayHighlightState = true</span>
+    } catch (e) {}
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (opts.preloadWindow) {</span>
+<span class="cstat-no" title="statement not covered">      createWindow()</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    menubar.showWindow = showWindow</span>
+<span class="cstat-no" title="statement not covered">    menubar.hideWindow = hideWindow</span>
+<span class="cstat-no" title="statement not covered">    menubar.emit('ready')</span>
+&nbsp;
+<span class="fstat-no" title="function not covered">    function clicked (e, bounds) {</span>
+<span class="cstat-no" title="statement not covered">      if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) <span class="cstat-no" title="statement not covered">return hideWindow()</span></span>
+<span class="cstat-no" title="statement not covered">      if (menubar.window &amp;&amp; menubar.window.isVisible()) <span class="cstat-no" title="statement not covered">return hideWindow()</span></span>
+<span class="cstat-no" title="statement not covered">      cachedBounds = bounds || cachedBounds</span>
+<span class="cstat-no" title="statement not covered">      showWindow(cachedBounds)</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function createWindow () {</span>
+<span class="cstat-no" title="statement not covered">      menubar.emit('create-window')</span>
+<span class="cstat-no" title="statement not covered">      var defaults = {</span>
+        show: false,
+        frame: false
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered">      var winOpts = extend(defaults, opts)</span>
+<span class="cstat-no" title="statement not covered">      menubar.window = new BrowserWindow(winOpts)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      menubar.positioner = new Positioner(menubar.window)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      menubar.window.on('blur', <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">        opts.alwaysOnTop ? emitBlur() : hideWindow()</span>
+      })
+&nbsp;
+<span class="cstat-no" title="statement not covered">      if (opts.showOnAllWorkspaces !== false) {</span>
+<span class="cstat-no" title="statement not covered">        menubar.window.setVisibleOnAllWorkspaces(true)</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered">      menubar.window.on('close', windowClear)</span>
+<span class="cstat-no" title="statement not covered">      menubar.window.loadURL(opts.index)</span>
+<span class="cstat-no" title="statement not covered">      menubar.emit('after-create-window')</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function showWindow (trayPos) {</span>
+<span class="cstat-no" title="statement not covered">      if (supportsTrayHighlightState) <span class="cstat-no" title="statement not covered">menubar.tray.setHighlightMode('always')</span></span>
+<span class="cstat-no" title="statement not covered">      if (!menubar.window) {</span>
+<span class="cstat-no" title="statement not covered">        createWindow()</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered">      menubar.emit('show')</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      if (trayPos &amp;&amp; trayPos.x !== 0) {</span>
+        // Cache the bounds
+<span class="cstat-no" title="statement not covered">        cachedBounds = trayPos</span>
+      } else <span class="cstat-no" title="statement not covered">if (cachedBounds) {</span>
+        // Cached value will be used if showWindow is called without bounds data
+<span class="cstat-no" title="statement not covered">        trayPos = cachedBounds</span>
+      } else <span class="cstat-no" title="statement not covered">if (menubar.tray.getBounds) {</span>
+        // Get the current tray bounds
+<span class="cstat-no" title="statement not covered">        trayPos = menubar.tray.getBounds()</span>
+      }
+&nbsp;
+      // Default the window to the right if `trayPos` bounds are undefined or null.
+<span class="cstat-no" title="statement not covered">      var noBoundsPosition = null</span>
+<span class="cstat-no" title="statement not covered">      if ((trayPos === undefined || trayPos.x === 0) &amp;&amp; opts.windowPosition.substr(0, 4) === 'tray') {</span>
+<span class="cstat-no" title="statement not covered">        noBoundsPosition = (process.platform === 'win32') ? 'bottomRight' : 'topRight'</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered">      var position = menubar.positioner.calculate(noBoundsPosition || opts.windowPosition, trayPos)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      var x = (opts.x !== undefined) ? opts.x : position.x</span>
+<span class="cstat-no" title="statement not covered">      var y = (opts.y !== undefined) ? opts.y : position.y</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      menubar.window.setPosition(x, y)</span>
+<span class="cstat-no" title="statement not covered">      menubar.window.show()</span>
+<span class="cstat-no" title="statement not covered">      menubar.emit('after-show')</span>
+<span class="cstat-no" title="statement not covered">      return</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function hideWindow () {</span>
+<span class="cstat-no" title="statement not covered">      if (supportsTrayHighlightState) <span class="cstat-no" title="statement not covered">menubar.tray.setHighlightMode('never')</span></span>
+<span class="cstat-no" title="statement not covered">      if (!menubar.window) <span class="cstat-no" title="statement not covered">return</span></span>
+<span class="cstat-no" title="statement not covered">      menubar.emit('hide')</span>
+<span class="cstat-no" title="statement not covered">      menubar.window.hide()</span>
+<span class="cstat-no" title="statement not covered">      menubar.emit('after-hide')</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function windowClear () {</span>
+<span class="cstat-no" title="statement not covered">      delete menubar.window</span>
+<span class="cstat-no" title="statement not covered">      menubar.emit('after-close')</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function emitBlur () {</span>
+<span class="cstat-no" title="statement not covered">      menubar.emit('focus-lost')</span>
+    }
+  }
+}
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Thu Apr 20 2017 15:16:21 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
